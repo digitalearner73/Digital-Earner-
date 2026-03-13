@@ -1,0 +1,57 @@
+<script type="module">
+
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+
+const supabaseUrl = "https://clbasxqamthvxrtnuqht.supabase.co";
+const supabaseKey = "sb_publishable_TQ1uOFcqdY2hOdONCmwUtw_ZfqysYAe";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+
+// DASHBOARD PROTECTION
+async function protectDashboard(){
+
+  const { data } = await supabase.auth.getSession();
+  const session = data.session;
+
+  if(!session){
+
+    window.location.href = "login.html";
+
+  }
+
+}
+
+
+// USERNAME LOAD
+async function loadUser(){
+
+  const { data } = await supabase.auth.getUser();
+
+  if(data.user){
+
+    const email = data.user.email;
+    const username = email.split("@")[0];
+
+    document.getElementById("username").textContent = username;
+
+  }
+
+}
+
+
+// LOGOUT
+window.confirmLogout = async function(){
+
+  await supabase.auth.signOut();
+
+  window.location.href = "login.html";
+
+}
+
+
+// RUN FUNCTIONS
+protectDashboard();
+loadUser();
+
+</script>

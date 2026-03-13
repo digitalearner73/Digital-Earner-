@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Top Performers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+font-family:Arial;
+background:#eef1f7;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+padding:15px;
+background:white;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.menu{
+font-size:24px;
+margin-right:10px;
+}
+
+.title{
+font-size:20px;
+font-weight:bold;
+}
+
+/* GLOBAL BOX */
+
+.global-box{
+margin:18px;
+padding:36px 20px;
+border-radius:18px;
+background:linear-gradient(45deg,#6a11cb,#2575fc);
+color:white;
+text-align:center;
+}
+
+.global-title{
+font-size:26px;
+font-weight:bold;
+}
+
+.global-sub{
+font-size:15px;
+opacity:0.9;
+}
+
+/* TITLE */
+
+.today{
+margin:20px;
+background:white;
+padding:10px;
+border-radius:8px;
+text-align:center;
+font-weight:bold;
+font-size:18px;
+color:#7c3aed;
+}
+
+/* CARD AREA */
+
+.card-area{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:25px;
+margin:20px;
+}
+
+/* FLIP CARD */
+
+.flip-container{
+width:90vw;
+max-width:360px;
+aspect-ratio:1/1;
+perspective:1000px;
+}
+
+.flip-card{
+width:100%;
+height:100%;
+position:relative;
+transform-style:preserve-3d;
+transition:transform .8s;
+}
+
+.flip-card.flip{
+transform:rotateY(180deg);
+}
+
+.card{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:22px;
+backface-visibility:hidden;
+box-shadow:0 12px 25px rgba(0,0,0,0.15);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:22px;
+overflow:hidden;
+}
+
+/* SHINE */
+
+.card::after{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+transform:rotate(25deg);
+animation:shine 5s infinite;
+}
+
+@keyframes shine{
+0%{transform:translateX(-100%) rotate(25deg);}
+100%{transform:translateX(100%) rotate(25deg);}
+}
+
+/* FRONT */
+
+.front{
+background:white;
+border-top:7px solid #f3c400;
+}
+
+.rank{
+font-size:48px;
+font-weight:700;
+color:#f3c400;
+margin-bottom:14px;
+}
+
+.name{
+font-size:26px;
+font-weight:600;
+color:#222;
+margin-bottom:6px;
+}
+
+.username{
+font-size:16px;
+font-weight:600;
+color:blue;
+margin-bottom:10px;
+}
+
+.emoji{
+font-size:26px;
+margin-right:6px;
+}
+
+.earning{
+font-size:15px;
+color:#555;
+line-height:1.5;
+margin-bottom:16px;
+}
+
+.amount-front{
+color:blue;
+}
+
+.crown{
+font-size:32px;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+}
+
+.champion{
+font-size:18px;
+font-weight:700;
+color:#f3c400;
+}
+
+/* BACK */
+
+.back{
+transform:rotateY(180deg);
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+color:white;
+}
+
+.community{
+font-size:30px;
+font-weight:700;
+margin-bottom:6px;
+}
+
+.tagline{
+font-size:15px;
+opacity:.9;
+margin-bottom:20px;
+}
+
+.profile img{
+width:95px;
+height:95px;
+border-radius:50%;
+border:5px solid #f3c400;
+object-fit:cover;
+margin-bottom:16px;
+}
+
+.user{
+font-size:22px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.amount{
+font-size:32px;
+font-weight:700;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
+/* CONFETTI */
+
+.confetti{
+position:fixed;
+width:8px;
+height:14px;
+top:-20px;
+opacity:0.8;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh) rotate(720deg);}
+}
+
+/* LEADERBOARD */
+
+.leaderboard{
+background:white;
+margin:30px 20px;
+padding:20px;
+border-radius:12px;
+}
+
+.leaderboard h2{
+text-align:center;
+}
+
+/* POPUP */
+
+.popup{
+position:fixed;
+bottom:20px;
+left:20px;
+background:white;
+padding:10px 14px;
+border-radius:8px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+animation:fade 6s forwards;
+}
+
+@keyframes fade{
+0%{opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{opacity:0}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+<div class="menu">☰</div>
+<div class="title">PERFORMERS</div>
+</div>
+
+<div class="global-box">
+<div class="global-title">Global Performers</div>
+<div class="global-sub">Meet Daily New Achievers</div>
+</div>
+
+<div class="today">
+Today's Top Performers
+</div>
+
+<div class="card-area">
+
+<!-- 1 -->
+
+<div class="flip-container">
+<div class="flip-card" id="card1" onclick="flip(this,'money1')">
+
+<div class="card front">
+
+<div class="rank">1st</div>
+
+<div class="name">
+<span class="emoji">🥂</span>
+Congratulations 👏
+</div>
+
+<div class="username" id="name1"></div>
+
+<div class="earning">
+For Your Single Day <span class="amount-front" id="front1"></span><br>
+Earning
+</div>
+
+<div class="crown">👑</div>
+
+<div class="champion">1st Place Champion!</div>
+
+</div>
+
+<div class="card back">
+
+<div class="community">Digital Earners</div>
+<div class="tagline">Earn Without Any Investment</div>
+
+<div class="profile">
+<img src="user1.jpg">
+</div>
+
+<div class="user" id="back1"></div>
+
+<div class="amount">₹<span id="money1">0</span></div>
+
+</div>
+
+</div>
+</div>
+
+<!-- 2 -->
+
+<div class="flip-container">
+<div class="flip-card" id="card2" onclick="flip(this,'money2')">
+
+<div class="card front">
+
+<div class="rank">2nd</div>
+
+<div class="name"><span class="emoji">🥂</span>Congratulations 👏</div>
+
+<div class="username" id="name2"></div>
+
+<div class="earning">
+For Your Single Day <span class="amount-front" id="front2"></span><br>
+Earning
+</div>
+
+<div class="crown">👑</div>
+
+<div class="champion">2nd Place Champion!</div>
+
+</div>
+
+<div class="card back">
+
+<div class="community">Digital Earners</div>
+<div class="tagline">Earn Without Any Investment</div>
+
+<div class="profile">
+<img src="user2.jpg">
+</div>
+
+<div class="user" id="back2"></div>
+
+<div class="amount">₹<span id="money2">0</span></div>
+
+</div>
+
+</div>
+</div>
+
+<!-- 3 -->
+
+<div class="flip-container">
+<div class="flip-card" id="card3" onclick="flip(this,'money3')">
+
+<div class="card front">
+
+<div class="rank">3rd</div>
+
+<div class="name"><span class="emoji">🥂</span>Congratulations 👏</div>
+
+<div class="username" id="name3"></div>
+
+<div class="earning">
+For Your Single Day <span class="amount-front" id="front3"></span><br>
+Earning
+</div>
+
+<div class="crown">👑</div>
+
+<div class="champion">3rd Place Champion!</div>
+
+</div>
+
+<div class="card back">
+
+<div class="community">Digital Earners</div>
+<div class="tagline">Earn Without Any Investment</div>
+
+<div class="profile">
+<img src="user3.jpg">
+</div>
+
+<div class="user" id="back3"></div>
+
+<div class="amount">₹<span id="money3">0</span></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="leaderboard">
+<h2>Top 10 Performers</h2>
+<ol id="top10"></ol>
+</div>
+
+<script>
+
+let names=["Rahul Sharma","Aman Khan","Aatifa Parveen","Sana Malik","Imran Ali","Neha Sharma","Adil Khan","Rohit Sharma","Arman Sheikh","Nida Khan"]
+
+function generate(){
+
+let arr=[]
+
+for(let i=0;i<10;i++){
+
+arr.push({
+name:names[Math.floor(Math.random()*names.length)],
+amount:Math.floor(Math.random()*2300)+2000
+})
+
+}
+
+arr.sort((a,b)=>b.amount-a.amount)
+
+arr[0].amount=Math.floor(Math.random()*200)+4100
+
+for(let i=1;i<=3;i++){
+
+document.getElementById("name"+i).innerText=arr[i-1].name
+document.getElementById("back"+i).innerText=arr[i-1].name
+document.getElementById("front"+i).innerText="₹"+arr[i-1].amount
+
+}
+
+let html=""
+
+arr.forEach(x=>{
+html+="<li>"+x.name+" - ₹"+x.amount+"</li>"
+})
+
+document.getElementById("top10").innerHTML=html
+
+}
+
+generate()
+
+function counter(id,target){
+
+let el=document.getElementById(id)
+let count=0
+
+let interval=setInterval(function(){
+
+count+=Math.ceil(target/120)
+
+if(count>=target){
+count=target
+clearInterval(interval)
+}
+
+el.innerText=count.toLocaleString('en-IN')
+
+},20)
+
+}
+
+function confetti(){
+
+for(let i=0;i<40;i++){
+
+let c=document.createElement("div")
+c.className="confetti"
+
+c.style.left=Math.random()*100+"vw"
+c.style.background="hsl("+Math.random()*360+",80%,60%)"
+c.style.animationDuration=(Math.random()*3+2)+"s"
+
+document.body.appendChild(c)
+
+setTimeout(()=>c.remove(),5000)
+
+}
+
+}
+
+function flip(card,id){
+
+card.classList.toggle("flip")
+
+let amount=parseInt(document.getElementById("front"+id.slice(-1)).innerText.replace("₹",""))
+
+if(card.classList.contains("flip")){
+counter(id,amount)
+confetti()
+}
+
+}
+
+setInterval(()=>flip(document.getElementById("card1"),"money1"),5000)
+setInterval(()=>flip(document.getElementById("card2"),"money2"),8000)
+setInterval(()=>flip(document.getElementById("card3"),"money3"),10000)
+
+function popup(){
+
+let name=names[Math.floor(Math.random()*names.length)]
+let amt=Math.floor(Math.random()*500)+200
+
+let p=document.createElement("div")
+p.className="popup"
+p.innerText=name+" earned ₹"+amt+" today"
+
+document.body.appendChild(p)
+
+setTimeout(()=>p.remove(),6000)
+
+}
+
+setInterval(popup,7000)
+
+</script>
+
+</body>
+</html>

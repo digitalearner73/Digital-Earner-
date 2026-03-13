@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Digital Earners</title>
+  <link rel="icon" href="logo.png">
+  
+  <!-- Preload important assets -->
+  <link rel="preload" href="logo.png" as="image">
+  
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #6366f1;
+      --text-dark: #111827;
+      --text-gray: #6b7280;
+      --bg-light: #ffffff;
+      --bg-section: #eef3f8;
+      --bg-section2: #dbe6ef;
+      --shadow-sm: 0 5px 12px rgba(0,0,0,0.08);
+      --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg-light);
+      overflow-x: hidden;
+      height: 100%;
+      animation: pageLoad 0.9s cubic-bezier(.16,1,.3,1);
+    }
+
+    @keyframes pageLoad {
+      0% { opacity: 0; transform: scale(0.96); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .wrapper {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    .header {
+      background: var(--bg-light);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 45px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    .logo span {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .menu {
+      font-size: 26px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+    }
+
+    .sidemenu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: var(--bg-light);
+      box-shadow: -3px 0 10px rgba(0,0,0,0.1);
+      padding-top: 100px;
+      transition: 0.4s cubic-bezier(.16,1,.3,1);
+      z-index: 1000;
+    }
+
+    .sidemenu.active {
+      right: 0;
+    }
+
+    .menu-header {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--primary), #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      padding: 10px 0;
+      letter-spacing: 1px;
+    }
+
+    #menuBtn {
+      position: relative;
+      top: 10px;
+    }
+
+    .sidemenu a {
+      display: block;
+      padding: 18px 25px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #1a237e;
+      font-weight: 600;
+      border-bottom: 1px solid #f0f0f0;
+      transition: 0.3s;
+    }
+
+    .sidemenu a:hover {
+      background: #f8faff;
+      color: var(--primary);
+      padding-left: 30px;
+    }
+
+    .container {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .mainlogo {
+      width: 200px;
+      margin-bottom: 25px;
+      border-radius: 50%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: var(--text-dark);
+      line-height: 40px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-gray);
+      font-size: 17px;
+      margin-top: 20px;
+      line-height: 28px;
+    }
+
+    .btn {
+      display: block;
+      width: 190px;
+      margin: 30px auto 0;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+
+    .start {
+      background: var(--bg-light);
+      color: var(--primary);
+      box-shadow: var(--shadow-md);
+      animation: pulse 2s infinite;
+    }
+
+    .work {
+      border: 3px solid red;
+      color: red;
+      background: white;
+      margin-top: 20px;
+    }
+
+    .alert {
+      background: #fff3cd;
+      color: #856404;
+      padding: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+      background: var(--bg-section);
+    }
+
+    .section-title {
+      background: white;
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: 700;
+      color: #5b5be0;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 14px;
+      margin: 12px auto;
+      max-width: 260px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+      font-size: 16px;
+      opacity: 0.3;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section2 {
+      padding: 70px 20px;
+      text-align: center;
+      background: var(--bg-section2);
+    }
+
+    .section2 h2 {
+      font-size: 32px;
+      color: #0f172a;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .line {
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin: 10px auto 25px;
+      border-radius: 5px;
+    }
+
+    .section2 p {
+      max-width: 500px;
+      margin: auto;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 350px;
+      margin: 20px auto;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      opacity: 0.3;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 30px;
+      width: 5px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    .card h3 {
+      margin-top: 10px;
+      font-size: 22px;
+    }
+
+    .card p {
+      font-size: 15px;
+    }
+
+    .icon {
+      font-size: 40px;
+      color: #5b5be0;
+    }
+
+    .credit {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      padding: 10px 0;
+      background: var(--bg-light);
+    }
+
+    .credit a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      left: 15px;
+      background: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      font-size: 13px;
+      max-width: 280px;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader-logo {
+      width: 120px;
+      animation: zoom 1.5s ease-in-out infinite;
+    }
+
+    @keyframes zoom {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="loader">
+  <img src="logo.png" alt="Digital Earners Logo" class="loader-logo">
+</div>
+
+<div class="wrapper">
+  <div class="content">
+
+    <div class="header">
+      <div class="logo">
+        <img src="logo.png" alt="Digital Earners Logo">
+        <span>Digital Earners</span>
+      </div>
+      <button class="menu" onclick="toggleMenu()" id="menuBtn">☰</button>
+    </div>
+
+    <div class="sidemenu" id="menu">
+      <div class="menu-header">Digital Earners</div>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="about.html">About Digital Earners</a>
+    </div>
+
+    <div class="container">
+      <img src="logo.png" alt="Digital Earners Main Logo" class="mainlogo">
+
+      <h1>Build Your Financial<br>Freedom With Digital<br>Skills</h1>
+
+      <p>
+        Join India's fastest growing community<br>
+        for creating sustainable online income<br>
+        with zero investment
+      </p>
+
+      <p style="font-size:14px; margin-top:15px; color:var(--text-gray);">
+        Trusted by 3400+ Members Across India
+      </p>
+
+      <div class="alert">
+        ⚡ Limited Seats Available For This Week
+      </div>
+
+      <a href="register.html" class="btn start">Get Started</a>
+      <a href="about.html" class="btn work">How It Works</a>
+    </div>
+
+    <div class="section">
+      <div class="section-title">What Makes Us Different</div>
+      <div class="box">1. No MLM</div>
+      <div class="box">2. No Chain System</div>
+      <div class="box">3. No Color Trading</div>
+      <div class="box">4. No Product Selling</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">How It Works</div>
+      <div class="box">1. Now Create Your Account</div>
+      <div class="box">2. Get Free Training</div>
+      <div class="box">3. Start Digital Work</div>
+      <div class="box">4. Get Paid Every 3 Days</div>
+    </div>
+
+    <div class="section2">
+      <h2>Why Choose Digital Earners?</h2>
+      <div class="line"></div>
+      <p>We provide everything you need to start earning online with complete support and training</p>
+
+      <div class="card"><div class="icon">🎓</div><h3>Expert Training</h3><p>Free professional training from industry experts worth ₹20,000+</p></div>
+      <div class="card"><div class="icon">🤝</div><h3>24/7 Support</h3><p>Dedicated support team available to guide you anytime</p></div>
+      <div class="card"><div class="icon">💰</div><h3>Regular Income</h3><p>Get paid every three days. Directly to your bank account.</p></div>
+      <div class="card"><div class="icon">👥</div><h3>Strong Community</h3><p>3400+ members supporting each other daily</p></div>
+      <div class="card"><div class="icon">📱</div><h3>Work Anywhere</h3><p>All you need is a smartphone to start your journey.</p></div>
+    </div>
+
+  </div>
+
+  <div class="credit">
+    Founder & CEO
+    <a href="https://instagram.com/rao.shadman73" target="_blank">@rao.shadman73</a>
+  </div>
+</div>
+
+<div class="popup" id="joinPopup">
+  👤 Aman from Delhi just joined to Digital Earners
+</div>
+
+<!-- SUPABASE LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabaseUrl = "https://clbasxqamthvxrtnuqht.supabase.co";
+const supabaseKey = "sb_publishable_TQ1uOFcqdY2hOdONCmwUtw_ZfqysYAe";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+</script>
+
+<script>
+  let menuOpen = false;
+
+  function toggleMenu() {
+    let menu = document.getElementById("menu");
+    let btn = document.getElementById("menuBtn");
+
+    menuOpen = !menuOpen;
+
+    if (menuOpen) {
+      menu.classList.add("active");
+      btn.innerHTML = "✕";
+      document.body.style.overflow = "hidden";
+    } else {
+      menu.classList.remove("active");
+      btn.innerHTML = "☰";
+      document.body.style.overflow = "auto";
+    }
+  }
+
+  window.addEventListener("load", function() {
+    let loader = document.getElementById("loader");
+    loader.style.opacity = "0";
+    setTimeout(function() { loader.style.display = "none"; }, 500);
+  });
+
+  let names = [
+    "Rahul from Delhi just joined",
+    "Aman from Jaipur just joined",
+    "Sana from Mumbai just joined",
+    "Arif from Hyderabad just joined",
+    "Priya from Lucknow just joined",
+    "Vikram from Bangalore just joined",
+    "Neha from Chandigarh just joined",
+    "Rohan from Kolkata just joined",
+    "Shreya from Pune just joined",
+    "Karan from Ahmedabad just joined",
+    "Ananya from Patna just joined",
+    "Aditya from Indore just joined",
+    "Meera from Bhopal just joined",
+    "Siddharth from Nagpur just joined",
+    "Riya from Surat just joined",
+    "Vivek from Coimbatore just joined",
+    "Ishita from Visakhapatnam just joined",
+    "Nikhil from Kanpur just joined",
+    "Pooja from Agra just joined",
+    "Raj from Ludhiana just joined",
+    "Simran from Amritsar just joined",
+    "Aakash from Guwahati just joined",
+    "Divya from Kochi just joined",
+    "Harsh from Bhubaneswar just joined",
+    "Tanya from Dehradun just joined"
+  ];
+
+  let popup = document.getElementById("joinPopup");
+  let popupCount = 0;
+
+  function showRandomPopup() {
+    if (popupCount >= 5 && Math.random() > 0.4) {
+      setTimeout(showRandomPopup, 30000);
+      return;
+    }
+
+    let randomIndex = Math.floor(Math.random() * names.length);
+    let name = names[randomIndex];
+    popup.innerHTML = "👤 " + name + " to Digital Earners";
+    popup.classList.add("visible");
+
+    setTimeout(() => {
+      popup.classList.remove("visible");
+    }, 5000);
+
+    popupCount++;
+  }
+
+  setTimeout(showRandomPopup, Math.random() * 3000 + 2000);
+  setInterval(showRandomPopup, Math.random() * 8000 + 12000);
+
+  let observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -10% 0px"
+  });
+
+  document.querySelectorAll(".box, .card").forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+<script type="module" src="auth-check.js"></script>
+
+</body>
+</html>

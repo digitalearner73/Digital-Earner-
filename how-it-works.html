@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Digital Earners</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f3f4f6, #eef2ff);
+    opacity: 0;
+    animation: pageFade 1s ease forwards;
+    touch-action: manipulation; /* जूम रोकने के लिए */
+}
+
+@keyframes pageFade {
+    to { opacity: 1; }
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* HEADER */
+.header {
+    background: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 45px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.menu {
+    font-size: 26px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 1001;
+}
+
+/* SIDE MENU */
+.sidemenu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.1);
+    padding-top: 100px;
+    transition: 0.4s;
+    z-index: 1000;
+}
+
+.sidemenu.active {
+    right: 0;
+}
+
+.menu-header {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 10px 0;
+}
+
+.sidemenu a {
+    display: block;
+    padding: 18px 25px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #1a237e;
+    font-weight: 600;
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.3s;
+}
+
+.sidemenu a:hover {
+    background: #f8faff;
+    padding-left: 30px;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.line {
+    width: 90px;
+    height: 5px;
+    background: #6366f1;
+    margin: 12px auto 20px auto;
+    border-radius: 10px;
+}
+
+.hero p {
+    color: #6b7280;
+    font-size: 18px;
+    max-width: 500px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    margin: 30px 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all .8s ease;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.number {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 60px;
+    color: #e5e7eb;
+    font-weight: 900;
+}
+
+.card p {
+    margin-top: 15px;
+    color: #6b7280;
+}
+
+.list {
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.check {
+    color: #22c55e;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+/* LEARN MORE */
+.learn-more {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.learn-more h2 {
+    color: #2563eb;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.learn-more p {
+    color: #6b7280;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+/* CTA BUTTON */
+.details-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(90deg, #2563eb, #4f46e5);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.details-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(79,70,229,.4);
+}
+
+/* OVERLAY & POPUP */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.7);
+    background: #ffffff;
+    backdrop-filter: blur(18px);
+    padding: 60px 40px;
+    width: 90%;
+    max-width: 540px;
+    border-radius: 28px;
+    border: 1px solid rgba(226,232,240,0.8);
+    box-shadow: 0 35px 80px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.popup.active {
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+.popup h3 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
+    color: #2563eb;
+}
+
+.popup p {
+    line-height: 1.9;
+    color: #1e293b;
+    font-size: 17px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 35px;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #64748b;
+    transition: 0.3s;
+}
+
+.popup .close:hover {
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+/* START EARNING SECTION */
+.start-earning-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+}
+
+.start-earning-section h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.start-earning-section p {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.start-btn {
+    display: inline-block;
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transition: all 0.4s;
+}
+
+/* FOOTER */
+.footer {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+.footer h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    font-weight: 800;
+    color: white;
+}
+
+.footer .tagline {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.footer .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 40px 0 20px;
+    color: #60a5fa;
+    position: relative;
+    display: inline-block;
+}
+
+.footer .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #60a5fa;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer li {
+    margin: 14px 0;
+    font-size: 17px;
+}
+
+.footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+    padding-left: 8px;
+}
+
+.footer .bottom {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #334155;
+    font-size: 15px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">
+        <img src="logo.png">
+        <span>Digital Earners</span>
+    </div>
+    <button class="menu" onclick="toggleMenu()" id="menuBtn">☰</button>
+</div>
+
+<div class="sidemenu" id="menu">
+    <div class="menu-header">Digital Earners</div>
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+    <a href="about.html">About Digital Earners</a>
+</div>
+
+<section class="hero">
+    <h1>Your Success Journey</h1>
+    <div class="line"></div>
+    <p>Follow a simple proven path designed to help beginners learn, grow and start earning online with confidence.</p>
+</section>
+
+<div class="card">
+    <div class="number">01</div>
+    <h2>Learn Basics</h2>
+    <p>Get started with easy-to-understand lessons that introduce you to the world of online income.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Discover popular online platforms</div>
+        <div class="item"><span class="check">✔</span>Set up your digital workspace quickly</div>
+        <div class="item"><span class="check">✔</span>Complete simple starter activities</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="number">02</div>
+    <h2>Build Skills</h2>
+    <p>Strengthen your abilities with practical training so you can work independently and grow confidently online.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Learn to create engaging content</div>
+        <div class="item"><span class="check">✔</span>Build and expand your online presence</div>
+        <div class="item"><span class="check">✔</span>Master personal branding basics</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="number">03</div>
+    <h2>Earn More</h2>
+    <p>Start applying proven methods to increase your earnings and create stable income sources in the digital space.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Explore time-saving automation techniques</div>
+        <div class="item"><span class="check">✔</span>Form effective online collaborations</div>
+        <div class="item"><span class="check">✔</span>Develop multiple revenue streams</div>
+    </div>
+</div>
+
+<div class="learn-more">
+    <h2>Want to Learn More <br>About Our Community?</h2>
+    <p>Discover how our members are achieving <br>financial independence through <br>digital skills</p>
+    <div class="details-btn" onclick="openPopup()">View Full Details →</div>
+</div>
+
+<section class="start-earning-section">
+    <h2>Start Your Earning Today</h2>
+    <p>Join thousands of motivated individuals who have already transformed their lives through consistent learning and smart action. Your journey to financial freedom starts here — no prior experience required, just dedication and the right guidance.</p>
+    <div id="startEarningBtn" class="start-btn">Start Earning Today</div>
+</section>
+
+<footer class="footer">
+    <h2>Digital Earners</h2>
+    <p class="tagline">Empowering financial freedom through zero-investment online opportunities since 2023.</p>
+
+    <div class="section-title">Quick Links</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://wa.me/917217392800" target="_blank">Contact</a></li>
+        <li><a href="#" onclick="handleExit(); return false;">Exit</a></li>
+    </ul>
+
+    <div class="bottom">
+        © 2023 - 2026 Digital Earners. All rights reserved.
+    </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="popup" id="popup">
+    <div class="close" onclick="closePopup()">✕</div>
+    <h3>How Digital Earners Works</h3>
+    <p>
+        Digital Earners is a modern learning community designed for people who want to build digital skills and create income opportunities online.
+        <br><br>
+        Members learn how to work from home, grow step-by-step, and use simple digital systems to build sustainable online income without any investment.
+    </p>
+</div>
+
+<script>
+let menuOpen = false;
+
+function toggleMenu() {
+    let menu = document.getElementById("menu");
+    let btn = document.getElementById("menuBtn");
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+        menu.classList.add("active");
+        btn.innerHTML = "✕";
+        document.body.classList.add("no-scroll");
+    } else {
+        menu.classList.remove("active");
+        btn.innerHTML = "☰";
+        document.body.classList.remove("no-scroll");
+    }
+}
+
+function openPopup() {
+    document.getElementById("popup").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+    document.body.classList.add("no-scroll");
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+    document.body.classList.remove("no-scroll");
+}
+
+function handleExit() {
+    if (confirm("क्या आप इस पेज को बंद करना चाहते हैं?")) {
+        window.close();
+    }
+}
+
+// Start Earning Button - Conditional Redirect
+document.getElementById("startEarningBtn").addEventListener("click", function() {
+    const isRegistered = localStorage.getItem("registered") === "true";
+    const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+    
+    if (isLoggedIn) {
+        window.location.href = "dashboard.html";  // या desktop.html
+    } else if (isRegistered) {
+        window.location.href = "login.html";
+    } else {
+        window.location.href = "register.html";
+    }
+});
+
+// Cards animation
+const cards = document.querySelectorAll(".card");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+cards.forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>
