@@ -429,7 +429,7 @@
         ⚡ Limited Seats Available For This Week
       </div>
 
-      <a href="register.html" class="btn start">Get Started</a>
+<a href="javascript:void(0)" onclick="startJourney()" class="btn start">Get Started</a>
       <a href="about.html" class="btn work">How It Works</a>
     </div>
 
@@ -577,6 +577,26 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
   document.querySelectorAll(".box, .card").forEach(el => {
     observer.observe(el);
   });
+</script>
+
+<script>
+
+async function startJourney() {
+  const { data: { session } } = await supabase.auth.getSession()
+  
+  if (session) {
+    window.location.href = "dashboard.html"
+  } else {
+    const hasAccount = localStorage.getItem('hasAccount')
+    
+    if (hasAccount === 'true') {
+      window.location.href = "login.html"
+    } else {
+      window.location.href = "register.html"
+    }
+  }
+}
+
 </script>
 
 <script type="module" src="auth-check.js"></script>

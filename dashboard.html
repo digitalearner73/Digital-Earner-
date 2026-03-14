@@ -450,15 +450,18 @@ document.getElementById("username").textContent=username;
 
 }
 
-window.confirmLogout=async function(){
-await supabase.auth.signOut();
-window.location.href="login.html";
+window.confirmLogout = async function() {
+  await supabase.auth.signOut();
+  localStorage.removeItem('hasAccount');
+  window.location.href = "index.html";
 }
 
 protectDashboard();
 loadUser();
 
 </script>
+
+<script type="module" src="auth-check.js"></script>
 
 </body>
 </html>

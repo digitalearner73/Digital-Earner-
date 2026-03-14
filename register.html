@@ -154,10 +154,11 @@ email:email.value,
 password:pass.value
 })
 
-if(error){
-alert(error.message)
-}else{
-window.location.replace("dashboard.html")
+if (error) {
+  alert(error.message)
+} else {
+  localStorage.setItem('hasAccount', 'true')
+  window.location.replace("dashboard.html")
 }
 
 }catch(e){
