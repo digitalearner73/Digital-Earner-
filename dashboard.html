@@ -1,57 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digital Earners</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f3f4f6;
+overflow-x:hidden;
+}
+
+.loaded .container,
+.loaded .topbar,
+.loaded .welcome-section {
+animation:smoothSlideIn 1.1s cubic-bezier(0.16,1,0.3,1) forwards;
+opacity:0;
+}
+
+@keyframes smoothSlideIn{
+0%{opacity:0;transform:translateY(60px);filter:blur(4px);}
+60%{opacity:0.7;filter:blur(2px);}
+100%{opacity:1;transform:translateY(0);filter:blur(0);}
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:white;
+box-shadow:0 2px 8px rgba(0,0,0,0.05);
+z-index:2000;
+}
+
+.logo-text{
+font-size:26px;
+font-weight:bold;
+background:linear-gradient(45deg,#9333ea,#f97316);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.icons{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.profile{
+width:38px;
+height:38px;
+border-radius:50%;
+overflow:hidden;
+border:2px solid #ddd;
+}
+
+.profile img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.menu{
+font-size:24px;
+cursor:pointer;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+right:-230px;
+width:230px;
+background:white;
+box-shadow:-4px 0 15px rgba(0,0,0,0.15);
+transition:0.3s;
+z-index:2500;
+border-radius:0 0 15px 15px;
+overflow:hidden;
+}
+
+.side-menu.active{
+right:0;
+}
+
+.side-header{
+padding:20px;
+border-bottom:1px solid #eee;
+}
+
+.side-title{
+font-size:24px;
+font-weight:bold;
+color:black;
+}
+
+.side-email{
+font-size:13px;
+color:#666;
+margin-top:8px;
+}
+
+.side-phone{
+font-size:13px;
+color:#666;
+margin-top:4px;
+}
+
+.menu-box{
+padding:15px 20px;
+border-bottom:1px solid #eee;
+position:relative;
+}
+
+.menu-text{
+font-size:16px;
+cursor:pointer;
+border-bottom:1px solid red;
+}
+
+.close-menu{
+position:absolute;
+right:8px;
+bottom:6px;
+font-size:15px;
+color:#ef4444;
+cursor:pointer;
+}
+
+.logout-popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:5000;
+backdrop-filter:blur(4px);
+}
+
+.popup-box{
+background:white;
+padding:32px 28px;
+border-radius:20px;
+width:320px;
+max-width:90%;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
+border:1px solid #e5e7eb;
+}
+
+.popup-title{
+font-size:20px;
+font-weight:700;
+color:#1f2937;
+margin-bottom:12px;
+}
+
+.popup-text{
+font-size:15px;
+color:#4b5563;
+margin-bottom:24px;
+}
+
+.popup-buttons{
+display:flex;
+gap:16px;
+justify-content:center;
+}
+
+.popup-buttons button{
+padding:12px 32px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+}
+
+.yes-btn{
+background:#ef4444;
+color:white;
+}
+
+.no-btn{
+background:#f3f4f6;
+}
+
+.welcome-section{
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.welcome-text{
+font-size:20px;
+font-weight:600;
+color:#333;
+}
+
+.username-highlight{
+background:linear-gradient(90deg,#4f46e5,#7c3aed);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+font-weight:800;
+}
+
+.sub-text{
+font-size:15px;
+color:#555;
+margin-top:4px;
+}
+
+.container{
+padding:10px;
+display:grid;
+grid-template-columns:1fr;
+gap:15px;
+}
+
+.box{
+background:white;
+height:22vh;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+text-align:center;
+margin:0 12px;
+cursor:pointer;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.box:active{
+animation:boxClick .4s ease forwards;
+}
+
+@keyframes boxClick{
+0%{transform:scale(1)}
+50%{transform:scale(1.08) rotate(2deg)}
+100%{transform:scale(1)}
+}
+
+.box-emoji{
+font-size:42px;
+margin-bottom:8px;
+}
+
+.box-title{
+font-size:22px;
+font-weight:bold;
+}
+
+.box-sub{
+font-size:15px;
+color:#777;
+margin-top:5px;
+}
+
+.performance{border-left:6px solid #6366f1;}
+.dashboard{border-left:6px solid #22c55e;}
+.earn{border-left:6px solid #f59e0b;}
+.rewards{border-left:6px solid #ef4444;}
+.support{border-left:6px solid #06b6d4;}
+
+</style>
+</head>
+
+<body class="loaded">
+
+<div class="side-menu" id="sideMenu">
+
+<div class="side-header">
+<div class="side-title">Digital Earners</div>
+<div class="side-email">📧 random@email.com</div>
+<div class="side-phone">📞 +91 9876543210</div>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('index.html')">Home</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('about.html')">About Us</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('https://wa.me/917217392800')">Contact Us</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="showLogout()">Logout</span>
+<span class="close-menu" onclick="toggleMenu()">Close</span>
+</div>
+
+</div>
+
+<div class="logout-popup" id="logoutPopup">
+<div class="popup-box">
+<div class="popup-title">Confirm Logout</div>
+<div class="popup-text">Are you sure you want to log out?</div>
+
+<div class="popup-buttons">
+<button class="yes-btn" onclick="confirmLogout()">Yes</button>
+<button class="no-btn" onclick="closeLogout()">No</button>
+</div>
+
+</div>
+</div>
+
+<div class="topbar">
+
+<div class="logo-text">Digital Earners</div>
+
+<div class="icons">
+
+<div class="profile">
+<img src="founder.jpg">
+</div>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+</div>
+
+</div>
+
+<div class="welcome-section">
+
+<div>
+<div class="welcome-text">
+Welcome <span class="username-highlight" id="username">User</span> 🤝
+</div>
+
+<div class="sub-text">
+Let's start your greatest earning journey 🚀
+</div>
+</div>
+
+<div>🚀</div>
+
+</div>
+
+<div class="container">
+
+<div class="box performance" onclick="openPage('performance.html')">
+<div class="box-emoji">🏆</div>
+<div class="box-title">Top Performance</div>
+<div class="box-sub">Meet top performers</div>
+</div>
+
+<div class="box dashboard" onclick="openPage('dashboard.html')">
+<div class="box-emoji">📊</div>
+<div class="box-title">Dashboard</div>
+<div class="box-sub">Visit dashboard</div>
+</div>
+
+<div class="box earn" onclick="openPage('earn.html')">
+<div class="box-emoji">💰</div>
+<div class="box-title">Go & Earn</div>
+<div class="box-sub">Start earning now</div>
+</div>
+
+<div class="box rewards" onclick="openPage('rewards.html')">
+<div class="box-emoji">🎁</div>
+<div class="box-title">Rewards & Offers</div>
+<div class="box-sub">View rewards</div>
+</div>
+
+<div class="box support" onclick="openPage('support.html')">
+<div class="box-emoji">🛠</div>
+<div class="box-title">Get Support</div>
+<div class="box-sub">Contact support</div>
+</div>
+
+</div>
+
+<script>
+
+function toggleMenu(){
+document.getElementById("sideMenu").classList.toggle("active");
+}
+
+function openPage(page){
+window.location.href=page;
+}
+
+function goPage(url){
+if(url.includes("wa.me")){
+window.open(url,"_blank");
+}else{
+window.location.href=url;
+}
+}
+
+function showLogout(){
+document.getElementById("logoutPopup").style.display="flex";
+}
+
+function closeLogout(){
+document.getElementById("logoutPopup").style.display="none";
+}
+
+</script>
+
 <script type="module">
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
 
-const supabaseUrl = "https://clbasxqamthvxrtnuqht.supabase.co";
-const supabaseKey = "sb_publishable_TQ1uOFcqdY2hOdONCmwUtw_ZfqysYAe";
+const supabaseUrl="https://clbasxqamthvxrtnuqht.supabase.co";
+const supabaseKey="sb_publishable_TQ1uOFcqdY2hOdONCmwUtw_ZfqysYAe";
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase=createClient(supabaseUrl,supabaseKey);
 
-
-// DASHBOARD PROTECTION
 async function protectDashboard(){
 
-  const { data } = await supabase.auth.getSession();
-  const session = data.session;
+const {data}=await supabase.auth.getSession();
 
-  if(!session){
-
-    window.location.href = "login.html";
-
-  }
+if(!data.session){
+window.location.href="login.html";
+}
 
 }
 
-
-// USERNAME LOAD
 async function loadUser(){
 
-  const { data } = await supabase.auth.getUser();
+const {data}=await supabase.auth.getUser();
 
-  if(data.user){
+if(data.user){
 
-    const email = data.user.email;
-    const username = email.split("@")[0];
+const fullName=data.user.user_metadata?.full_name;
 
-    document.getElementById("username").textContent = username;
-
-  }
+if(fullName){
+document.getElementById("username").textContent=fullName;
+}else{
+const email=data.user.email;
+const username=email.split("@")[0];
+document.getElementById("username").textContent=username;
+}
 
 }
 
-
-// LOGOUT
-window.confirmLogout = async function(){
-
-  await supabase.auth.signOut();
-
-  window.location.href = "login.html";
-
 }
 
+window.confirmLogout=async function(){
+await supabase.auth.signOut();
+window.location.href="login.html";
+}
 
-// RUN FUNCTIONS
 protectDashboard();
 loadUser();
 
 </script>
+
+</body>
+</html>
