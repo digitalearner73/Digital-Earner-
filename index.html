@@ -13,7 +13,9 @@
     :root {
       --primary: #4f46e5;
       --primary-dark: #4338ca;
-      --accent: #6366f1;
+      --primary-light: #818cf8;
+      --secondary: #10b981;
+      --accent: #f59e0b;
       --text-dark: #111827;
       --text-gray: #6b7280;
       --bg-light: #ffffff;
@@ -21,6 +23,8 @@
       --bg-section2: #dbe6ef;
       --shadow-sm: 0 5px 12px rgba(0,0,0,0.08);
       --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 20px 40px rgba(79,70,229,0.15);
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
     html {
@@ -30,7 +34,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
       background: var(--bg-light);
       overflow-x: hidden;
       height: 100%;
@@ -52,14 +56,19 @@
       flex: 1;
     }
 
-    .header {
-      background: var(--bg-light);
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
+   .header {
+  background: #e0e5ec;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+  margin: 10px;
+  border-radius: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
     .logo {
       display: flex;
@@ -67,15 +76,17 @@
     }
 
     .logo img {
-      width: 45px;
+      width: 50px;
       margin-right: 10px;
       border-radius: 50%;
+      border: 2px solid var(--primary-light);
     }
 
     .logo span {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-dark);
+      font-size: 22px;
+      font-weight: 800;
+      color: #1e3a5f;
+text-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
     }
 
     .menu {
@@ -84,86 +95,37 @@
       background: none;
       border: none;
       z-index: 1001;
-    }
-
-    .sidemenu {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: var(--bg-light);
-      box-shadow: -3px 0 10px rgba(0,0,0,0.1);
-      padding-top: 100px;
-      transition: 0.4s cubic-bezier(.16,1,.3,1);
-      z-index: 1000;
-    }
-
-    .sidemenu.active {
-      right: 0;
-    }
-
-    .menu-header {
-      position: absolute;
-      top: 50px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 26px;
-      font-weight: 900;
-      background: linear-gradient(90deg, var(--primary), #7c3aed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      padding: 10px 0;
-      letter-spacing: 1px;
-    }
-
-    #menuBtn {
-      position: relative;
-      top: 10px;
-    }
-
-    .sidemenu a {
-      display: block;
-      padding: 18px 25px;
-      font-size: 18px;
-      text-decoration: none;
-      color: #1a237e;
-      font-weight: 600;
-      border-bottom: 1px solid #f0f0f0;
-      transition: 0.3s;
-    }
-
-    .sidemenu a:hover {
-      background: #f8faff;
       color: var(--primary);
-      padding-left: 30px;
+      float: right;
     }
 
     .container {
       text-align: center;
-      padding: 60px 20px;
+      padding: 40px 20px 60px;
       max-width: 500px;
       margin: auto;
     }
 
     .mainlogo {
-      width: 200px;
-      margin-bottom: 25px;
+      width: 110px;
+      margin-bottom: 20px;
       border-radius: 50%;
       display: block;
       margin-left: auto;
       margin-right: auto;
+      border: 4px solid white;
+      box-shadow: 0 10px 30px rgba(79,70,229,0.3);
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 32px;
       color: var(--text-dark);
-      line-height: 40px;
+      line-height: 42px;
       margin: 0;
-      font-weight: 700;
+      font-weight: 800;
+      background: linear-gradient(90deg, #1a237e, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     p {
@@ -173,49 +135,145 @@
       line-height: 28px;
     }
 
-    .btn {
-      display: block;
-      width: 190px;
-      margin: 30px auto 0;
-      padding: 16px;
-      border-radius: 14px;
-      font-size: 18px;
+    /* Trust Badges */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #f0f3ff;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 14px;
       font-weight: 600;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(79,70,229,0.1);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge span {
+      font-weight: 800;
+      background: var(--primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    /* CTA Buttons */
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin: 30px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      min-width: 180px;
+      padding: 16px 24px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
       text-decoration: none;
       transition: 0.3s;
+      text-align: center;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
 
+    /* ===== BUTTON STYLES ===== */
     .start {
       background: var(--bg-light);
       color: var(--primary);
       box-shadow: var(--shadow-md);
+      border: 2px solid var(--primary);
+      position: relative;
+      outline: none;
+    }
+
+    .btn-pulse {
       animation: pulse 2s infinite;
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 20px 30px rgba(79, 70, 229, 0.6); }
+      100% { transform: scale(1); box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4); }
+    }
+
     .work {
-      border: 3px solid red;
-      color: red;
+      border: 2px solid var(--primary);
+      color: var(--primary);
       background: white;
-      margin-top: 20px;
+    }
+
+    .work:hover {
+      background: var(--primary);
+      color: white;
     }
 
     .alert {
-      background: #fff3cd;
+      background: linear-gradient(90deg, #fff3cd, #fff9e6);
       color: #856404;
-      padding: 12px;
+      padding: 14px;
       text-align: center;
+      font-weight: 700;
+      margin: 20px 0 0;
+      border-radius: 50px;
+      border-left: 5px solid #ffc107;
+      box-shadow: 0 4px 12px rgba(255,193,7,0.2);
+    }
+
+    /* Stats Section */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 40px 20px;
+    }
+
+    .stat-item {
+      background: white;
+      padding: 20px 10px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      border-bottom: 4px solid var(--primary);
+      transition: 0.3s;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(79,70,229,0.15);
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-gray);
       font-weight: 600;
-      margin-top: 20px;
-      border-radius: 8px;
+      margin-top: 5px;
     }
 
     .section {
-      padding: 60px 20px;
+      padding: 50px 20px;
       text-align: center;
       background: var(--bg-section);
     }
@@ -223,26 +281,30 @@
     .section-title {
       background: white;
       display: inline-block;
-      padding: 12px 25px;
-      border-radius: 30px;
-      font-weight: 700;
-      color: #5b5be0;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 20px;
+      padding: 12px 30px;
+      border-radius: 40px;
+      font-weight: 800;
+      color: var(--primary);
+      box-shadow: 0 5px 15px rgba(79,70,229,0.1);
+      margin-bottom: 30px;
+      font-size: 22px;
+      border: 1px solid rgba(79,70,229,0.2);
     }
 
     .box {
       background: white;
-      padding: 14px;
-      margin: 12px auto;
-      max-width: 260px;
-      border-radius: 12px;
-      box-shadow: var(--shadow-sm);
+      padding: 16px 20px;
+      margin: 15px auto;
+      max-width: 280px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       font-weight: 600;
       font-size: 16px;
       opacity: 0.3;
       transform: translateY(40px);
       transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+      border-left: 5px solid var(--primary);
+      text-align: left;
     }
 
     .box.show {
@@ -251,7 +313,7 @@
     }
 
     .section2 {
-      padding: 70px 20px;
+      padding: 60px 20px;
       text-align: center;
       background: var(--bg-section2);
     }
@@ -264,30 +326,31 @@
     }
 
     .line {
-      width: 60px;
+      width: 80px;
       height: 4px;
-      background: var(--accent);
-      margin: 10px auto 25px;
+      background: var(--gradient);
+      margin: 15px auto 30px;
       border-radius: 5px;
     }
 
-    .section2 p {
-      max-width: 500px;
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 400px;
       margin: auto;
-      margin-bottom: 40px;
     }
 
     .card {
       background: white;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 350px;
-      margin: 20px auto;
-      box-shadow: var(--shadow-md);
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
       position: relative;
       opacity: 0.3;
       transform: translateY(40px);
       transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+      border: 1px solid rgba(79,70,229,0.1);
     }
 
     .card.show {
@@ -295,29 +358,272 @@
       transform: translateY(0);
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 30px;
-      width: 5px;
-      height: 40px;
-      background: var(--accent);
-      border-radius: 4px;
-    }
-
-    .card h3 {
-      margin-top: 10px;
-      font-size: 22px;
-    }
-
-    .card p {
-      font-size: 15px;
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 40px rgba(79,70,229,0.15);
     }
 
     .icon {
-      font-size: 40px;
-      color: #5b5be0;
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: var(--text-dark);
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-gray);
+      margin: 0;
+    }
+
+/* ===== MENU STYLES - NEUMORPHISM ===== */
+.menu-btn {
+  width: 50px;
+  height: 50px;
+  background: #e0e5ec;
+  border: none;
+  border-radius: 15px;
+  color: #4f46e5;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+  transition: 0.3s;
+}
+
+.menu-btn:active {
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-container {
+  position: fixed;
+  top: 20px;
+  right: -350px;
+  width: 300px;
+  background: #e0e5ec;
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1000;
+  padding: 20px 15px;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+
+.menu-container.active {
+  right: 20px;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-box {
+  background: #e0e5ec;
+  border-radius: 12px;
+  padding: 12px 15px;
+  box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+  transition: 0.3s;
+  position: relative;
+  text-align: left;
+}
+
+.menu-box.digital-box {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.digital-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e67e22;
+  text-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
+}
+
+.close-btn {
+  width: 35px;
+  height: 35px;
+  background: #e0e5ec;
+  border: none;
+  border-radius: 10px;
+  color: #ef4444;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.close-btn:active {
+  box-shadow: inset 2px 2px 4px #a3b1c6, inset -2px -2px 4px #ffffff;
+}
+
+.menu-link {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  text-decoration: none;
+  padding: 3px 5px;
+  border-radius: 6px;
+  transition: 0.2s;
+  text-align: left;
+}
+
+.menu-link:hover {
+  color: #e67e22;
+  padding-left: 10px;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+    /* Testimonials */
+    .testimonials {
+      padding: 50px 20px;
+      background: white;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 450px;
+      margin: auto;
+    }
+
+    .testimonial-card {
+      background: #f8faff;
+      padding: 25px;
+      border-radius: 20px;
+      position: relative;
+      border: 1px solid rgba(79,70,229,0.1);
+      text-align: left;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -5px;
+      left: 20px;
+      font-size: 60px;
+      color: var(--primary);
+      opacity: 0.2;
+      font-family: serif;
+    }
+
+    .testimonial-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px dashed #ddd;
+      padding-top: 15px;
+    }
+
+    .author-name {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .author-earnings {
+      font-size: 14px;
+      color: var(--secondary);
+      font-weight: 600;
+      margin: 3px 0;
+    }
+
+    .author-location {
+      font-size: 13px;
+      color: var(--text-gray);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 50px 20px;
+      background: #f8faff;
+    }
+
+    .faq-item {
+      background: white;
+      margin: 15px 0;
+      padding: 18px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border-left: 4px solid var(--primary);
+    }
+
+    .faq-question {
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .faq-answer {
+      color: var(--text-gray);
+      font-size: 14px;
+      padding-left: 20px;
+    }
+
+    /* Floating WhatsApp */
+    .float-wa {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      z-index: 999;
+      animation: waPulse 2s infinite;
+      display: block;
+      width: 60px;
+      height: 60px;
+    }
+
+    .float-wa img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      border: 3px solid white;
+    }
+
+    @keyframes waPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     .credit {
@@ -325,8 +631,9 @@
       font-size: 16px;
       font-weight: 600;
       color: var(--text-dark);
-      padding: 10px 0;
-      background: var(--bg-light);
+      padding: 20px 0;
+      background: white;
+      border-top: 1px solid #eef2f6;
     }
 
     .credit a {
@@ -337,13 +644,13 @@
 
     .popup {
       position: fixed;
-      bottom: 20px;
+      bottom: 100px;
       left: 15px;
       background: white;
-      padding: 10px 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      font-size: 14px;
       max-width: 280px;
       z-index: 999;
       opacity: 0;
@@ -352,6 +659,8 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      border-left: 5px solid var(--secondary);
+      font-weight: 600;
     }
 
     .popup.visible {
@@ -383,6 +692,23 @@
       50% { transform: scale(1.15); }
       100% { transform: scale(1); }
     }
+
+    .offer-ribbon {
+      background: var(--gradient);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      position: relative;
+      z-index: 99;
+      animation: slideDown 0.8s;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -390,6 +716,11 @@
 
 <div id="loader">
   <img src="logo.png" alt="Digital Earners Logo" class="loader-logo">
+</div>
+
+<!-- Offer Ribbon -->
+<div class="offer-ribbon">
+  ⏳ Limited Time: Free Training This Week Only! 🏃‍♂️
 </div>
 
 <div class="wrapper">
@@ -400,20 +731,13 @@
         <img src="logo.png" alt="Digital Earners Logo">
         <span>Digital Earners</span>
       </div>
-      <button class="menu" onclick="toggleMenu()" id="menuBtn">☰</button>
+      <button class="menu-btn" onclick="toggleMenu()" id="menuBtn">☰</button>
     </div>
-
-    <div class="sidemenu" id="menu">
-      <div class="menu-header">Digital Earners</div>
-      <a href="login.html">Login</a>
-      <a href="register.html">Register</a>
-      <a href="about.html">About Digital Earners</a>
-    </div>
-
+     
     <div class="container">
       <img src="logo.png" alt="Digital Earners Main Logo" class="mainlogo">
 
-      <h1>Build Your Financial<br>Freedom With Digital<br>Skills</h1>
+      <h1>Build Your Financial Freedom With Digital Skills</h1>
 
       <p>
         Join India's fastest growing community<br>
@@ -421,32 +745,54 @@
         with zero investment
       </p>
 
-      <p style="font-size:14px; margin-top:15px; color:var(--text-gray);">
-        Trusted by 3400+ Members Across India
-      </p>
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <div class="badge"><span>3400+</span> Active Members</div>
+        <div class="badge"><span>⭐ 4.8</span> Google Rating</div>
+        <div class="badge"><span>🔒</span> SSL Secure</div>
+      </div>
 
       <div class="alert">
         ⚡ Limited Seats Available For This Week
       </div>
 
-<a href="javascript:void(0)" onclick="startJourney()" class="btn start">Get Started</a>
-      <a href="about.html" class="btn work">How It Works</a>
+      <!-- CTA Buttons Side by Side -->
+      <div class="cta-buttons">
+        <a href="javascript:void(0)" onclick="startJourney()" class="btn start btn-pulse">✨ Get Started ✨</a>
+        <a href="how-it-works.html" class="btn work">How It Works →</a>
+      </div>
+    </div>
+
+    <!-- Stats Counter -->
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number" id="memberCount">3.4k+</div>
+        <div class="stat-label">Active Members</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="earningCount">₹12Cr+</div>
+        <div class="stat-label">Total Earnings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="dailyCount">450+</div>
+        <div class="stat-label">Daily Joiners</div>
+      </div>
     </div>
 
     <div class="section">
-      <div class="section-title">What Makes Us Different</div>
-      <div class="box">1. No MLM</div>
-      <div class="box">2. No Chain System</div>
-      <div class="box">3. No Color Trading</div>
-      <div class="box">4. No Product Selling</div>
+      <div class="section-title">✨ What Makes Us Different ✨</div>
+      <div class="box">🚫 No MLM - Direct Earnings</div>
+      <div class="box">⛓️ No Chain System</div>
+      <div class="box">🎨 No Color Trading</div>
+      <div class="box">📦 No Product Selling</div>
     </div>
 
     <div class="section">
-      <div class="section-title">How It Works</div>
-      <div class="box">1. Now Create Your Account</div>
-      <div class="box">2. Get Free Training</div>
-      <div class="box">3. Start Digital Work</div>
-      <div class="box">4. Get Paid Every 3 Days</div>
+      <div class="section-title">📋 How It Works 📋</div>
+      <div class="box">1️⃣ Create Your Account (Free)</div>
+      <div class="box">2️⃣ Get Free Training</div>
+      <div class="box">3️⃣ Start Digital Work</div>
+      <div class="box">4️⃣ Get Paid Every 3 Days</div>
     </div>
 
     <div class="section2">
@@ -454,11 +800,47 @@
       <div class="line"></div>
       <p>We provide everything you need to start earning online with complete support and training</p>
 
-      <div class="card"><div class="icon">🎓</div><h3>Expert Training</h3><p>Free professional training from industry experts worth ₹20,000+</p></div>
-      <div class="card"><div class="icon">🤝</div><h3>24/7 Support</h3><p>Dedicated support team available to guide you anytime</p></div>
-      <div class="card"><div class="icon">💰</div><h3>Regular Income</h3><p>Get paid every three days. Directly to your bank account.</p></div>
-      <div class="card"><div class="icon">👥</div><h3>Strong Community</h3><p>3400+ members supporting each other daily</p></div>
-      <div class="card"><div class="icon">📱</div><h3>Work Anywhere</h3><p>All you need is a smartphone to start your journey.</p></div>
+      <div class="cards-grid">
+        <div class="card"><div class="icon">🎓</div><h3>Expert Training</h3><p>Free professional training from industry experts worth ₹20,000+</p></div>
+        <div class="card"><div class="icon">🤝</div><h3>24/7 Support</h3><p>Dedicated support team available to guide you anytime</p></div>
+        <div class="card"><div class="icon">💰</div><h3>Regular Income</h3><p>Get paid every three days. Directly to your bank account.</p></div>
+        <div class="card"><div class="icon">👥</div><h3>Strong Community</h3><p>3400+ members supporting each other daily</p></div>
+        <div class="card"><div class="icon">📱</div><h3>Work Anywhere</h3><p>All you need is a smartphone to start your journey.</p></div>
+      </div>
+    </div>
+
+    <!-- Testimonials - 4 Cards that change every 24 hours -->
+    <div class="testimonials">
+      <div class="section-title">💬 Member Reviews 💬</div>
+      
+      <div class="testimonial-grid" id="testimonialContainer">
+        <!-- JavaScript se dynamically fill hoga -->
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <div class="section-title">❓ FAQs ❓</div>
+      
+      <div class="faq-item">
+        <div class="faq-question">❓ Is this really free?</div>
+        <div class="faq-answer">Yes! 100% free. No hidden charges ever. No investment required.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">❓ When do I get paid?</div>
+        <div class="faq-answer">Every 3 days directly to your bank account or UPI.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">❓ What skills do I need?</div>
+        <div class="faq-answer">No skills needed! We provide complete free training.</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">❓ Mobile se kaam kar sakte hain?</div>
+        <div class="faq-answer">Bilkul! Bas ek smartphone chahiye. PC ki need nahi.</div>
+      </div>
     </div>
 
   </div>
@@ -468,6 +850,36 @@
     <a href="https://instagram.com/rao.shadman73" target="_blank">@rao.shadman73</a>
   </div>
 </div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Neumorphism Menu -->
+<div class="menu-container" id="menu">
+  <div class="menu-items">
+    <div class="menu-box digital-box">
+      <span class="digital-title">Digital Earners</span>
+      <button class="close-btn" onclick="toggleMenu()">✕</button>
+    </div>
+    <div class="menu-box">
+      <a href="login.html" class="menu-link">🔐 Login</a>
+    </div>
+    <div class="menu-box">
+      <a href="register.html" class="menu-link">📝 Register</a>
+    </div>
+    <div class="menu-box">
+      <a href="https://wa.me/917217392800" class="menu-link" target="_blank">📞 Contact Us</a>
+    </div>
+    <div class="menu-box">
+      <a href="about.html" class="menu-link">📖 About Digital Earners</a>
+    </div>
+  </div>
+</div>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/917217392800" class="float-wa" target="_blank">
+  <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp">
+</a>
 
 <div class="popup" id="joinPopup">
   👤 Aman from Delhi just joined to Digital Earners
@@ -484,32 +896,137 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 
 <script>
-  let menuOpen = false;
-
-  function toggleMenu() {
-    let menu = document.getElementById("menu");
-    let btn = document.getElementById("menuBtn");
-
-    menuOpen = !menuOpen;
-
-    if (menuOpen) {
-      menu.classList.add("active");
-      btn.innerHTML = "✕";
-      document.body.style.overflow = "hidden";
-    } else {
-      menu.classList.remove("active");
-      btn.innerHTML = "☰";
-      document.body.style.overflow = "auto";
-    }
-  }
-
+  // Loader
   window.addEventListener("load", function() {
     let loader = document.getElementById("loader");
     loader.style.opacity = "0";
     setTimeout(function() { loader.style.display = "none"; }, 500);
   });
 
-  let names = [
+  // Menu Toggle Function
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
+    
+    menu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    if (menu.classList.contains('active')) {
+      body.classList.add('menu-open');
+    } else {
+      body.classList.remove('menu-open');
+    }
+  }
+
+  // Zoom Block
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener('gesturestart', (e) => {
+    e.preventDefault();
+  });
+
+  // Testimonials Data
+  const testimonialsData = [
+    {
+      text: "3 months mein mera earnings ₹45k+ ho gaya. Best decision ever!",
+      name: "Rahul Sharma",
+      earnings: "₹45,000+",
+      location: "Delhi"
+    },
+    {
+      text: "Zero investment mein itna kamaya, kabhi socha nahi tha. Thank you Digital Earners!",
+      name: "Priya Patel",
+      earnings: "₹32,000+",
+      location: "Mumbai"
+    },
+    {
+      text: "Part time mein 25k monthly aa rahe hain. Full time ka plan kar raha hoon!",
+      name: "Amit Kumar",
+      earnings: "₹25,000+",
+      location: "Bangalore"
+    },
+    {
+      text: "Mere 200+ referrals hain. Ab main doosron ko bhi sikha raha hoon.",
+      name: "Sneha Reddy",
+      earnings: "₹85,000+",
+      location: "Hyderabad"
+    },
+    {
+      text: "College ke saath saath earning bhi ho rahi hai. Parents proud feel karte hain.",
+      name: "Vikram Singh",
+      earnings: "₹18,000+",
+      location: "Jaipur"
+    },
+    {
+      text: "Bank job chhod di. Ab full time Digital Earners ke saath hoon.",
+      name: "Neha Gupta",
+      earnings: "₹1.2L+",
+      location: "Lucknow"
+    },
+    {
+      text: "Meri wife ne bhi start kiya. Ghar mein do income sources!",
+      name: "Rajesh Mehta",
+      earnings: "₹65,000+",
+      location: "Ahmedabad"
+    },
+    {
+      text: "सिर्फ 2 महीने में investment निकाल लिया। अब profit में हूँ।",
+      name: "Arjun Yadav",
+      earnings: "₹38,000+",
+      location: "Patna"
+    }
+  ];
+
+  function getDailyTestimonials() {
+    const today = new Date().toDateString().split(' ').join('');
+    let hash = 0;
+    for (let i = 0; i < today.length; i++) {
+      hash = ((hash << 5) - hash) + today.charCodeAt(i);
+      hash |= 0;
+    }
+    
+    const randomIndex = Math.abs(hash);
+    const shuffled = [...testimonialsData];
+    
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = (randomIndex + i) % (i + 1);
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    
+    return shuffled.slice(0, 4);
+  }
+
+  function renderTestimonials() {
+    const container = document.getElementById('testimonialContainer');
+    const dailyTestimonials = getDailyTestimonials();
+    
+    let html = '';
+    dailyTestimonials.forEach(t => {
+      html += `
+        <div class="testimonial-card">
+          <div class="testimonial-text">"${t.text}"</div>
+          <div class="testimonial-author">
+            <span class="author-name">${t.name}</span>
+            <span class="author-earnings">💰 Earned: ${t.earnings}</span>
+            <span class="author-location">📍 ${t.location}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html;
+  }
+
+  renderTestimonials();
+  setInterval(renderTestimonials, 86400000);
+
+  // Join Popup Names
+  const names = [
     "Rahul from Delhi just joined",
     "Aman from Jaipur just joined",
     "Sana from Mumbai just joined",
@@ -538,29 +1055,29 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
   ];
 
   let popup = document.getElementById("joinPopup");
-  let popupCount = 0;
+  let lastPopupIndex = -1;
 
   function showRandomPopup() {
-    if (popupCount >= 5 && Math.random() > 0.4) {
-      setTimeout(showRandomPopup, 30000);
-      return;
-    }
-
-    let randomIndex = Math.floor(Math.random() * names.length);
-    let name = names[randomIndex];
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * names.length);
+    } while (randomIndex === lastPopupIndex && names.length > 1);
+    
+    lastPopupIndex = randomIndex;
+    const name = names[randomIndex];
+    
     popup.innerHTML = "👤 " + name + " to Digital Earners";
     popup.classList.add("visible");
 
     setTimeout(() => {
       popup.classList.remove("visible");
     }, 5000);
-
-    popupCount++;
   }
 
   setTimeout(showRandomPopup, Math.random() * 3000 + 2000);
-  setInterval(showRandomPopup, Math.random() * 8000 + 12000);
+  setInterval(showRandomPopup, Math.random() * 7000 + 8000);
 
+  // Intersection Observer
   let observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -580,7 +1097,6 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 
 <script>
-
 async function startJourney() {
   const { data: { session } } = await supabase.auth.getSession()
   
@@ -596,10 +1112,6 @@ async function startJourney() {
     }
   }
 }
-
 </script>
 
 <script type="module" src="auth-check.js"></script>
-
-</body>
-</html>
