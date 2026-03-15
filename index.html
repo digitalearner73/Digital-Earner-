@@ -1098,6 +1098,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 <script>
 async function startJourney() {
+alert("Button clicked!")
   const { data: { session } } = await supabase.auth.getSession()
   
   if (session) {
