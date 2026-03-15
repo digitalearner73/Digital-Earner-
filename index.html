@@ -1098,8 +1098,11 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 <script>
 async function startJourney() {
-alert("Button clicked!")
+  alert("Button clicked!")
+  
   const { data: { session } } = await supabase.auth.getSession()
+  console.log("Session:", session)
+  console.log("hasAccount:", localStorage.getItem('hasAccount'))
   
   if (session) {
     window.location.href = "dashboard.html"
